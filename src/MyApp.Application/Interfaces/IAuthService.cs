@@ -1,4 +1,6 @@
-﻿namespace SF.BikeTheft.Application.Interfaces;
+﻿using SF.BikeTheft.Application.Models.DTOs;
+
+namespace SF.BikeTheft.Application.Interfaces;
 
 public interface IAuthService
 {

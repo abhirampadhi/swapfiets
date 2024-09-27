@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using SF.BikeTheft.Application.Commands.Create;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SF.BikeTheft.Domain.Entities;
+using SF.BikeTheft.Infrastructure.Interface;
 
 namespace SF.BikeTheft.Application.Handlers;
 

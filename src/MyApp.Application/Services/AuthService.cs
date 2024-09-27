@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Isopoh.Cryptography.Argon2;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -6,11 +7,10 @@ using SF.BikeTheft.Application.Commands.Create;
 using SF.BikeTheft.Application.Interfaces;
 using SF.BikeTheft.Application.Models.DTOs;
 using SF.BikeTheft.Application.Queries;
+using SF.BikeTheft.Common.JwtWrapper;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace SF.BikeTheft.Application.Services;
 

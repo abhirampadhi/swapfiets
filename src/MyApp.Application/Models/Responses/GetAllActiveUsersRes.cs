@@ -4,6 +4,6 @@ namespace SF.BikeTheft.Application.Models.Responses
 {
     public class GetAllActiveUsersRes
     {
-        public IList<UserDTO> Data { get; set; }
+        public IList<UserDto> Data { get; set; }
     }
 }

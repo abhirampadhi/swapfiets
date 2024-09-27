@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
+using Isopoh.Cryptography.Argon2;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SF.BikeTheft.Application.Commands.Create;
+using SF.BikeTheft.Application.Interfaces;
 using SF.BikeTheft.Application.Models.DTOs;
+using SF.BikeTheft.Application.Models.Requests;
 using SF.BikeTheft.WebApi.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Net;
 
 namespace SF.BikeTheft.WebApi.Controllers;

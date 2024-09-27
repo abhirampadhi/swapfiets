@@ -4,6 +4,6 @@ namespace SF.BikeTheft.Application.Models.Responses
 {
     public class CreateUserRes
     {
-        public UserDTO Data { get; set; }
+        public UserDto Data { get; set; }
     }
 }

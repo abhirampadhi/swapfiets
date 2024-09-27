@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Isopoh.Cryptography.Argon2" Version="2.0.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
@@ -11,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyApp.Common\SF.BikeTheft.Common.csproj" />
     <ProjectReference Include="..\MyApp.Infrastructure\SF.BikeTheft.Infrastructure.csproj" />
   </ItemGroup>
 
