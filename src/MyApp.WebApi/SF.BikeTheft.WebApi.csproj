@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>    
+    <PackageReference Include="Serilog" Version="4.0.1" />    
+    <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />    
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyApp.Application\SF.BikeTheft.Application.csproj" />
+    <ProjectReference Include="..\MyApp.Common\SF.BikeTheft.Common.csproj" />
+    <ProjectReference Include="..\MyApp.Domain\SF.BikeTheft.Domain.csproj" />
+    <ProjectReference Include="..\MyApp.Infrastructure\SF.BikeTheft.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
