@@ -12,9 +12,9 @@ public class HttpClientWrapper : IHttpClientWrapper
     private readonly IAsyncPolicy<HttpResponseMessage> _circuitBreakerPolicy;
     private readonly ILogger<HttpClientWrapper> _logger;
 
-    public HttpClientWrapper(HttpClient httpClient, ILogger<HttpClientWrapper> logger, IHttpClientFactory httpClientFactory)
+    public HttpClientWrapper(HttpClient httpClient, ILogger<HttpClientWrapper> logger)
     {
-        _httpClient = httpClientFactory.CreateClient("ProductAPI") ?? throw new ArgumentNullException(nameof(httpClient));
+        _httpClient = httpClient;
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _retryPolicy = PolicyRegistry.GetRetryPolicy(_logger);
         _circuitBreakerPolicy = PolicyRegistry.GetCircuitBreakerPolicy(_logger);

@@ -6,20 +6,40 @@ namespace SF.BikeTheft.Infrastructure.Services;
 
 public class BikeTheftService : IBikeTheftService
 {
-    private readonly HttpClient _httpClient;
+    private readonly IHttpClientWrapper _httpClientWrapper;
 
-    public BikeTheftService(HttpClient httpClient)
+    public BikeTheftService(IHttpClientWrapper httpClientWrapper)
     {
-        _httpClient = httpClient;
+        _httpClientWrapper = httpClientWrapper;
     }
 
     public async Task<List<BikeTheftEntity>> GetBikeTheftsAsync(string city, int distance)
     {
-        var response = await _httpClient.GetAsync($"https://bikeindex.org:443/api/v3/search?location={city}&distance={distance}&stolenness=proximity");
+        var response = await _httpClientWrapper.GetAsync($"/api/v3/search?location={city}&distance={distance}&stolenness=proximity");
         response.EnsureSuccessStatusCode();
 
-        var content = await response.Content.ReadAsStringAsync();
-        var bikeThefts = JsonConvert.DeserializeObject<List<BikeTheftEntity>>(content);
-        return bikeThefts;
+        var data = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<List<BikeTheftEntity>>(data);
     }
+
+    //public async Task<int> GetBikeTheftCountAsync(string city, int distance)
+    //{
+    //    var response = await _httpClientWrapper.GetAsync($"/api/v3/search/count?location={city}&distance={distance}&stolenness=proximity");
+    //    response.EnsureSuccessStatusCode();
+
+    //    var data = await response.Content.ReadAsStringAsync();
+    //    return JsonConvert.DeserializeObject<int>(data);
+    //}
+
+    //public async Task<BikeTheftEntity> GetBikeTheftByIdAsync(int id)
+    //{
+    //    var response = await _httpClientWrapper.GetAsync($"/api/v3/bikes/{id}");
+    //    response.EnsureSuccessStatusCode();
+
+    //    var data = await response.Content.ReadAsStringAsync();
+    //    return JsonConvert.DeserializeObject<BikeTheftEntity>(data);
+    //}
+
+
 }
+
