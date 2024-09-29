@@ -1,6 +1,6 @@
-﻿namespace SF.BikeTheft.WebApi.Models;
+﻿namespace SF.BikeTheft.Application.Models.DTOs;
 
-public sealed class BikeTheft
+public sealed class BikeDto
 {
     public int Id { get; set; }
     public long DateStolen { get; set; }

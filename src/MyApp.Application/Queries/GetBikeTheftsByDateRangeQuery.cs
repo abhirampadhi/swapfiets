@@ -3,7 +3,7 @@ using SF.BikeTheft.Application.Models.DTOs;
 
 namespace SF.BikeTheft.Application.Queries;
 
-public class GetBikeTheftsByDateRangeQuery : IRequest<List<BikeTheftDto>>
+public class GetBikeTheftsByDateRangeQuery : IRequest<List<BikeDto>>
 {
     public DateTime StartDate { get; }
     public DateTime EndDate { get; }

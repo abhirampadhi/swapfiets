@@ -6,7 +6,7 @@ using SF.BikeTheft.Infrastructure.Interface;
 
 namespace SF.BikeTheft.Application.Handlers;
 
-public class GetBikeTheftsHandler : IRequestHandler<GetBikeTheftsQuery, List<BikeTheftDto>>
+public class GetBikeTheftsHandler : IRequestHandler<GetBikeTheftsQuery, List<BikeDto>>
 {
     private readonly IBikeTheftApiService _bikeTheftService;
     private readonly IMapper _mapper;
@@ -17,9 +17,9 @@ public class GetBikeTheftsHandler : IRequestHandler<GetBikeTheftsQuery, List<Bik
         _mapper = mapper;
     }
 
-    public async Task<List<BikeTheftDto>> Handle(GetBikeTheftsQuery request, CancellationToken cancellationToken)
+    public async Task<List<BikeDto>> Handle(GetBikeTheftsQuery request, CancellationToken cancellationToken)
     {
         var thefts = await _bikeTheftService.GetBikeTheftsAsync(request.City, request.Distance);
-        return _mapper.Map<List<BikeTheftDto>>(thefts);
+        return _mapper.Map<List<BikeDto>>(thefts);
     }
 }

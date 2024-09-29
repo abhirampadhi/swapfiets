@@ -4,5 +4,5 @@ namespace SF.BikeTheft.Application.Interfaces;
 
 public interface IBikeTheftService
 {
-    Task<List<BikeTheftDto>> GetBikeTheftsByDateRangeAsync(DateTime startDate, DateTime endDate);
+    Task<List<BikeDto>> GetBikeTheftsByDateRangeAsync(DateTime startDate, DateTime endDate);
 }

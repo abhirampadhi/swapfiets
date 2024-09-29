@@ -3,6 +3,6 @@ namespace SF.BikeTheft.Infrastructure.Interface;
 
 public interface IBikeTheftApiService
 {
-    Task<List<BikeTheftEntity>> GetBikeTheftsAsync(string city, int distance);
-    Task<List<BikeTheftEntity>> GetBikeTheftsByDateRangeAsync(DateTime startDate, DateTime endDate);
+    Task<List<BikeEntity>> GetBikeTheftsAsync(string city, int distance);
+    Task<List<BikeEntity>> GetBikeTheftsByDateRangeAsync(DateTime startDate, DateTime endDate);
 }

@@ -6,7 +6,7 @@ using SF.BikeTheft.Infrastructure.Interface;
 
 namespace SF.BikeTheft.Application.Handlers;
 
-public class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeTheftsByDateRangeQuery, List<BikeTheftDto>>
+public class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeTheftsByDateRangeQuery, List<BikeDto>>
 {
     private readonly IBikeTheftApiService _bikeTheftService;
     private readonly IMapper _mapper;
@@ -17,9 +17,9 @@ public class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeTheftsByDa
         _mapper = mapper;
     }
 
-    public async Task<List<BikeTheftDto>> Handle(GetBikeTheftsByDateRangeQuery request, CancellationToken cancellationToken)
+    public async Task<List<BikeDto>> Handle(GetBikeTheftsByDateRangeQuery request, CancellationToken cancellationToken)
     {
         var bikeThefts = await _bikeTheftService.GetBikeTheftsByDateRangeAsync(request.StartDate, request.EndDate);
-        return _mapper.Map<List<BikeTheftDto>>(bikeThefts);
+        return _mapper.Map<List<BikeDto>>(bikeThefts);
     }
 }
