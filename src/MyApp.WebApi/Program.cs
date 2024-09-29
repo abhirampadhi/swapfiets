@@ -4,16 +4,19 @@ using Serilog.Formatting.Compact;
 using SF.BikeTheft.Application.DependencyInjections;
 using SF.BikeTheft.Infrastructure.DependencyInjection;
 using SF.BikeTheft.WebApi.Extensions;
+using SF.BikeTheft.Common.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//The Log folder is temporary arrangemnet, recommendation is to use Azure Blob 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .Enrich.FromLogContext()
-    .WriteTo.File(new CompactJsonFormatter(), "Logs/ProductInsuranceLog-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File(new CompactJsonFormatter(), "Logs/BikeTheft-.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
+
 
 var appSettings = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -21,28 +24,33 @@ var appSettings = new ConfigurationBuilder()
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .Build();
 
+// Add JWT authentication
+builder.Services.AddJwtAuthentication(builder.Configuration);
 // Automapper service
 builder.Services.AddAutoMapper(typeof(Program));
-
-builder.Services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddApiService();
-builder.Services.AddApplicationService();
-builder.Services.AddInfrastructureService();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddSerilog();
+builder.Services.AddApplicationService();
+builder.Services.AddInfrastructureService();
+builder.Services.AddCommonConfigureServices();
+builder.Services.AddApiService();
+builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDocumentation();
+    app.UseDeveloperExceptionPage();
 }
-app.UseExceptionHandler();
+
+// Enable authentication and authorization
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 

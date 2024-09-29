@@ -2,6 +2,7 @@
 using Polly;
 
 namespace SF.BikeTheft.Infrastructure.Policies;
+
 public static class PolicyRegistry
 {
     public static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy(ILogger logger)

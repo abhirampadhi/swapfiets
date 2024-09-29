@@ -15,14 +15,14 @@ public class BikeTheftsController : ControllerBase
         _mediator = mediator;
     }
 
-    // GET api/bikethefts?city=Amsterdam&distance=20
-    //[HttpGet]
-    //public async Task<IActionResult> GetBikeThefts([FromQuery] string city, [FromQuery] int distance = 20)
-    //{
-    //    var query = new GetBikeTheftsQuery { City = city, Distance = distance };
-    //    var result = await _mediator.Send(query);
-    //    return Ok(result);
-    //}
+    //GET api/bikethefts? city = Amsterdam & distance = 20
+    [HttpGet]
+    public async Task<IActionResult> GetBikeThefts([FromQuery] string city, [FromQuery] int distance = 20)
+    {
+        var query = new GetBikeTheftsQuery(city, distance);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
 
     //// GET api/bikethefts/count?city=Amsterdam&distance=20
     //[HttpGet("count")]

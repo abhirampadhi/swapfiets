@@ -8,10 +8,10 @@ namespace SF.BikeTheft.Application.Handlers;
 
 public class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeTheftsByDateRangeQuery, List<BikeTheftDto>>
 {
-    private readonly IBikeTheftService _bikeTheftService;
+    private readonly IBikeTheftApiService _bikeTheftService;
     private readonly IMapper _mapper;
 
-    public GetBikeTheftsByDateRangeHandler(IBikeTheftService bikeTheftService, IMapper mapper)
+    public GetBikeTheftsByDateRangeHandler(IBikeTheftApiService bikeTheftService, IMapper mapper)
     {
         _bikeTheftService = bikeTheftService;
         _mapper = mapper;

@@ -49,9 +49,4 @@ public class HttpClientWrapper : IHttpClientWrapper
             throw;
         }
     }
-
-    public void Dispose()
-    {
-        _httpClient.Dispose();
-    }
 }

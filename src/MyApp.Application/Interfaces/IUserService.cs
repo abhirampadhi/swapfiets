@@ -1,14 +1,13 @@
 using SF.BikeTheft.Application.Models.Requests;
 using SF.BikeTheft.Application.Models.Responses;
 
-namespace SF.BikeTheft.Application.Interfaces
+namespace SF.BikeTheft.Application.Interfaces;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        Task<CreateUserRes> CreateUser(CreateUserReq req);
+    Task<CreateUserRes> CreateUser(CreateUserReq req);
 
-        Task<ValidateUserRes> ValidateUser(ValidateUserReq req);
+    Task<ValidateUserRes> ValidateUser(ValidateUserReq req);
 
-        Task<GetAllActiveUsersRes> GetAllActiveUsers();
-    }
+    Task<GetAllActiveUsersRes> GetAllActiveUsers();
 }

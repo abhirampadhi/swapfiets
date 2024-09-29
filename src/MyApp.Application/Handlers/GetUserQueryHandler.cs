@@ -3,6 +3,7 @@ using MediatR;
 using SF.BikeTheft.Application.Models.DTOs;
 using SF.BikeTheft.Application.Queries;
 using SF.BikeTheft.Infrastructure.Interface;
+
 namespace SF.BikeTheft.Application.Handlers;
 
 public sealed class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDto>
