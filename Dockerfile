@@ -1,21 +1,26 @@
-# Use an official .NET Core runtime as a parent image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 80
-
-# Use the SDK for build
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY . .
-RUN dotnet restore "../SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj"
-RUN dotnet build "../SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj" -c Release -o /app/build
 
-# Publish the app
-FROM build AS publish
-RUN dotnet publish "../SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj" -c Release -o /app/publish
+# Copy the project files and restore any dependencies
+COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj ./SF.BikeTheft.WebApi/
+COPY src/SF.BikeTheft.Application/SF.BikeTheft.Application.csproj ./SF.BikeTheft.Application/
+COPY src/SF.BikeTheft.Common/SF.BikeTheft.Common.csproj ./SF.BikeTheft.Common/
+COPY src/SF.BikeTheft.Domain/SF.BikeTheft.Domain.csproj ./SF.BikeTheft.Domain/
+COPY src/SF.BikeTheft.Infrastructure/SF.BikeTheft.Infrastructure.csproj ./SF.BikeTheft.Infrastructure/
 
-# Final stage for runtime
-FROM base AS final
+RUN dotnet restore ./SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj
+
+# Copy the remaining files and build the app
+COPY src/ .
+RUN dotnet build ./SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj -c Release -o /app/build
+
+# Publish the app to a folder in the container
+RUN dotnet publish ./SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj -c Release -o /app/publish
+
+# Use the official .NET runtime image to run the app
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "../SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.dll"]
+COPY --from=build /app/publish .
+
+# Run the app
+ENTRYPOINT ["dotnet", "SF.BikeTheft.WebApi.dll"]
