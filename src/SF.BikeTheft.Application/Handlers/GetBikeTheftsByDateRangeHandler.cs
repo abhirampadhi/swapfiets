@@ -6,7 +6,7 @@ using SF.BikeTheft.Infrastructure.Interface;
 
 namespace SF.BikeTheft.Application.Handlers;
 
-public class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeTheftsByDateRangeQuery, List<BikeDto>>
+public sealed class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeTheftsByDateRangeQuery, List<BikeDto>>
 {
     private readonly IBikeTheftApiService _bikeTheftService;
     private readonly IMapper _mapper;
