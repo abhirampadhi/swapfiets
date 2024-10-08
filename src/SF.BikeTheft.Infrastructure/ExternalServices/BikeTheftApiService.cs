@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SF.BikeTheft.Domain.Entities;
 using SF.BikeTheft.Infrastructure.Interface;
 
@@ -7,17 +8,27 @@ namespace SF.BikeTheft.Infrastructure.ExternalServices;
 public class BikeTheftApiService : IBikeTheftApiService
 {
     private readonly IHttpClientWrapper _httpClientWrapper;
+    private readonly IConfiguration _configuration;
 
-    public BikeTheftApiService(IHttpClientWrapper httpClientWrapper)
+    public BikeTheftApiService(IHttpClientWrapper httpClientWrapper, IConfiguration configuration)
     {
         _httpClientWrapper = httpClientWrapper;
+        _configuration = configuration;
     }
 
     public async Task<List<BikeEntity>> GetBikeTheftsAsync(string city, int distance)
     {
         try
         {
-            var response = await _httpClientWrapper.GetAsync($"https://bikeindex.org:443/api/v3/search?page=1&per_page=25&location={city}&distance={distance}&stolenness=proximity");
+            var baseUrl = _configuration["BikeTheftApi:BaseUrl"];
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                throw new Exception("BaseUrl configuration not found.");
+            }
+
+            var url = $"{baseUrl}?page=1&per_page=25&location={city}&distance={distance}&stolenness=proximity";
+
+            var response = await _httpClientWrapper.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -31,9 +42,7 @@ public class BikeTheftApiService : IBikeTheftApiService
         }
         catch (JsonException ex)
         {
-            // Log or handle the error
-            Console.WriteLine($"JSON Deserialization Error: {ex.Message}");
-            return new List<BikeEntity>();
+            throw new Exception("An error occurred while processing the response data.", ex);
         }
         catch (HttpRequestException ex)
         {
@@ -44,34 +53,4 @@ public class BikeTheftApiService : IBikeTheftApiService
             throw new Exception("An unexpected error occurred.", ex);
         }
     }
-
-    public async Task<List<BikeEntity>> GetBikeTheftsByDateRangeAsync(DateTime startDate, DateTime endDate)
-    {
-        var response = await _httpClientWrapper.GetAsync($"/api/v3/search?location={startDate}&distance={endDate}&stolenness=proximity");
-        response.EnsureSuccessStatusCode();
-
-        var data = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<List<BikeEntity>>(data);
-    }
-
-    //public async Task<int> GetBikeTheftCountAsync(string city, int distance)
-    //{
-    //    var response = await _httpClientWrapper.GetAsync($"/api/v3/search/count?location={city}&distance={distance}&stolenness=proximity");
-    //    response.EnsureSuccessStatusCode();
-
-    //    var data = await response.Content.ReadAsStringAsync();
-    //    return JsonConvert.DeserializeObject<int>(data);
-    //}
-
-    //public async Task<BikeTheftEntity> GetBikeTheftByIdAsync(int id)
-    //{
-    //    var response = await _httpClientWrapper.GetAsync($"/api/v3/bikes/{id}");
-    //    response.EnsureSuccessStatusCode();
-
-    //    var data = await response.Content.ReadAsStringAsync();
-    //    return JsonConvert.DeserializeObject<BikeTheftEntity>(data);
-    //}
-
-
 }
-

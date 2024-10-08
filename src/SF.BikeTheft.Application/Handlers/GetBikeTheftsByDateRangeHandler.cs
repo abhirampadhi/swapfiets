@@ -19,7 +19,8 @@ public sealed class GetBikeTheftsByDateRangeHandler : IRequestHandler<GetBikeThe
 
     public async Task<List<BikeDto>> Handle(GetBikeTheftsByDateRangeQuery request, CancellationToken cancellationToken)
     {
-        var bikeThefts = await _bikeTheftService.GetBikeTheftsByDateRangeAsync(request.StartDate, request.EndDate);
-        return _mapper.Map<List<BikeDto>>(bikeThefts);
+        //var bikeThefts = await _bikeTheftService.GetBikeTheftsByDateRangeAsync(request.StartDate, request.EndDate);
+        //return _mapper.Map<List<BikeDto>>(bikeThefts);
+        return new List<BikeDto>();
     }
 }

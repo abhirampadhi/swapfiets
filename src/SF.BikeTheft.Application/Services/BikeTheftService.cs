@@ -18,7 +18,8 @@ public class BikeTheftService : IBikeTheftService
 
     public async Task<List<BikeDto>> GetBikeTheftsByDateRangeAsync(DateTime startDate, DateTime endDate)
     {
-        var bikeThefts = await _bikeTheftApiService.GetBikeTheftsByDateRangeAsync(startDate, endDate);
-        return _mapper.Map<List<BikeDto>>(bikeThefts);
+        //var bikeThefts = await _bikeTheftApiService.GetBikeTheftsByDateRangeAsync(startDate, endDate);
+        //return _mapper.Map<List<BikeDto>>(bikeThefts);
+        return new List<BikeDto>();
     }
 }

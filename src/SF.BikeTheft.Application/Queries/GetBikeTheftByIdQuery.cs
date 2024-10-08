@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SF.BikeTheft.Application.Queries;
+﻿namespace SF.BikeTheft.Application.Queries;
 
 public sealed class GetBikeTheftByIdQuery
 {
+    public GetBikeTheftByIdQuery(int id)
+    {
+        Id = id;
+    }
+
+    public int Id { get; }
 }

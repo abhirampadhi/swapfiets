@@ -6,6 +6,8 @@ public sealed class DeleteBikeTheftCommand : IRequest
 {
     public DeleteBikeTheftCommand(int id)
     {
-            
+        Id = id;
     }
+
+    public int Id { get;  }
 }

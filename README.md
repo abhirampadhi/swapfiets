@@ -1,3 +1,89 @@
+### Steps to Setup
+
+- Clone the repository and enter the directory
+- Run the command `dotnet restore`
+- Run the command `dotnet run`
+
+### You need to generate a Bearer token to access Weather forcast APIs
+Step- 1: Register a user (use sample request)
+
+* POST `api/auth/register`
+
+    * Register user's details to the in memory database and returns the JWT token along with the user information after the user enters their information.
+    * Post Http Request Link: `https://<YOUR-DOMAIN:PORT>/auth/register`
+    * Request Body Example:
+
+        ```json
+        {
+            "name": "Abhiram Padhi",
+            "userName": "abhirampadhi",
+            "password": "pass123",
+            "roles": [
+                "User", 
+                "Admin"
+            ]
+        }
+        ```
+
+    * Response Example:
+
+        ```json
+        {
+            "userName": "abhirampadhi",
+            "name": "Abhiram Padhi",
+            "roles": [
+                "User",
+                "Admin"
+            ],
+            "isActive": false,
+            "token": null,
+            "password": "$argon2id$v=19$m=65536,t=3,p=1$gFcsc5mOvzCclGj+o2CqeQ$TBCPrC6HW1+kCmtCc7vai9JJv3SOgPQK/mMjiJf7X8M"
+        }
+        ```
+Step- 2
+* POST `api/auth/login`
+
+  
+    
+    * Request Body Example:
+
+        ```json
+        {
+            "userName": "abhirampadhi",
+            "password": "pass123"
+        }
+        ```
+
+    * Response Example:
+
+        ```json
+        {
+            "userName": "abhirampadhi",
+            "name": "Abhiram Padhi",
+            "roles": [
+                "User",
+                "Admin"
+            ],
+            "isActive": true,
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkaXR5YW9iZXJhaTEiLCJnaXZlbl9uYW1lIjoiQWRpdHlhIE9iZXJhaSIsInJvbGUiOlsiVXNlciIsIkFkbWluIl0sIm5iZiI6MTY5OTI3OTQyNywiZXhwIjoxNjk5MjgxMjI3LCJpYXQiOjE2OTkyNzk0MjcsImlzcyI6IlRlc3RJc3N1ZXIiLCJhdWQiOiJUZXN0QXVkaWVuY2UifQ.d9bAAqm1iHWmf7klIBWA2tFf2Pkvzfkee1lBvhv0_Ag",
+            "password": "$argon2id$v=19$m=65536,t=3,p=1$gFcsc5mOvzCclGj+o2CqeQ$TBCPrC6HW1+kCmtCc7vai9JJv3SOgPQK/mMjiJf7X8M"
+        }
+        ```
+         
+        > Note: Token returned will be different from the example
+
+
+
+    * Returns claims from the JWT sent as the **Bearer token** in the `Authorization` header with **User** role.
+    * Request Header Example:
+
+        ```
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkaXR5YTEiLCJnaXZlbl9uYW1lIjoiQWRpdHlhIE9iZXJhaSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNjk5Mjc5NjA2LCJleHAiOjE2OTkyODE0MDYsImlhdCI6MTY5OTI3OTYwNiwiaXNzIjoiVGVzdElzc3VlciIsImF1ZCI6IlRlc3RBdWRpZW5jZSJ9.JpCzjncNg14Ptx1c1fRt4fZmUAIcuBSowL_WoVYZo6s
+        ```
+
+
+
+
 # Onion Architecture / Clean Architecture
 
 <p align="center">
