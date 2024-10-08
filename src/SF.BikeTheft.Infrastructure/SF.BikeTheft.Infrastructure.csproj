@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyApp.Domain\SF.BikeTheft.Domain.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Domain\SF.BikeTheft.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

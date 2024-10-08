@@ -40,6 +40,10 @@
     <ProjectReference Include="..\MyApp.Common\SF.BikeTheft.Common.csproj" />
     <ProjectReference Include="..\MyApp.Domain\SF.BikeTheft.Domain.csproj" />
     <ProjectReference Include="..\MyApp.Infrastructure\SF.BikeTheft.Infrastructure.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Application\SF.BikeTheft.Application.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Common\SF.BikeTheft.Common.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Domain\SF.BikeTheft.Domain.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Infrastructure\SF.BikeTheft.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyApp.Common\SF.BikeTheft.Common.csproj" />
-    <ProjectReference Include="..\MyApp.Infrastructure\SF.BikeTheft.Infrastructure.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Common\SF.BikeTheft.Common.csproj" />
+    <ProjectReference Include="..\SF.BikeTheft.Infrastructure\SF.BikeTheft.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
