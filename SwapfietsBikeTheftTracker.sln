@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16ADFAB2-2234-42E2-BDDE-AB8C5A64F1B1}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.BikeTheft.Domain", "src\MyApp.Domain\SF.BikeTheft.Domain.csproj", "{4A141A4F-AB7E-45C7-BC69-7EEA65CACEAB}"
 EndProject
@@ -30,6 +33,27 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4043815B-44A8-4CFD-BAA9-3806DE8610F2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.BikeTheft.Common", "src\MyApp.Common\SF.BikeTheft.Common.csproj", "{C9175B14-CA8E-4E75-8275-7B7FDFDB3E48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{8891C424-82F3-4739-8E0B-E23F3140A90E}"
+	ProjectSection(SolutionItems) = preProject
+		kubernetes-deploy.yaml = kubernetes-deploy.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "helm", "helm", "{CC0DB986-1AF0-4E05-9290-CF66FE06EDEE}"
+	ProjectSection(SolutionItems) = preProject
+		Chart.yaml = Chart.yaml
+		values.yaml = values.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{5CA85ACC-67E4-4BE2-9C1B-FE0BBA50F988}"
+	ProjectSection(SolutionItems) = preProject
+		deployment.yaml = deployment.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure-pipelines", ".azure-pipelines", "{2C759C41-3DF5-4581-B48D-781515FED554}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,6 +110,10 @@ Global
 		{E4F8EC22-75B4-43D0-BDCE-31BA382D2774} = {16ADFAB2-2234-42E2-BDDE-AB8C5A64F1B1}
 		{4043815B-44A8-4CFD-BAA9-3806DE8610F2} = {16ADFAB2-2234-42E2-BDDE-AB8C5A64F1B1}
 		{C9175B14-CA8E-4E75-8275-7B7FDFDB3E48} = {4043815B-44A8-4CFD-BAA9-3806DE8610F2}
+		{8891C424-82F3-4739-8E0B-E23F3140A90E} = {16ADFAB2-2234-42E2-BDDE-AB8C5A64F1B1}
+		{CC0DB986-1AF0-4E05-9290-CF66FE06EDEE} = {8891C424-82F3-4739-8E0B-E23F3140A90E}
+		{5CA85ACC-67E4-4BE2-9C1B-FE0BBA50F988} = {CC0DB986-1AF0-4E05-9290-CF66FE06EDEE}
+		{2C759C41-3DF5-4581-B48D-781515FED554} = {16ADFAB2-2234-42E2-BDDE-AB8C5A64F1B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D0999DBD-9980-4C46-8618-E8042003DA86}

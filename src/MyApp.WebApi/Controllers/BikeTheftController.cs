@@ -17,7 +17,7 @@ public class BikeTheftsController : ControllerBase
 
     //GET api/bikethefts? city = Amsterdam & distance = 20
     [HttpGet]
-    public async Task<IActionResult> GetBikeThefts([FromQuery] string city, [FromQuery] int distance = 20)
+    public async Task<IActionResult> SearchBikeThefts([FromQuery] string city, [FromQuery] double? latitude, [FromQuery] double? longitude ,[FromQuery] int distance = 20)
     {
         var query = new GetBikeTheftsQuery(city, distance);
         var result = await _mediator.Send(query);

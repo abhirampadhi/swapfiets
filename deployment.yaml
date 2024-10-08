@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sf-biketheft-webapi
+  labels:
+    app: sf-biketheft-webapi
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: sf-biketheft-webapi
+  template:
+    metadata:
+      labels:
+        app: sf-biketheft-webapi
+    spec:
+      containers:
+        - name: sf-biketheft-webapi
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sf-biketheft-webapi
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+  selector:
+    app: sf-biketheft-webapi
