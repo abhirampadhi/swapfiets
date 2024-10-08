@@ -5,13 +5,16 @@ namespace SF.BikeTheft.Application.Queries;
 
 public class GetBikeTheftsQuery : IRequest<List<BikeDto>>
 {
-    public string City { get; set; }
-    public int Distance { get; set; }
+    public string? City { get; }
+    public int Distance { get; }
+    public double? Longitude { get; }
+    public double? Latitude { get; }
 
-    public GetBikeTheftsQuery(string city, int distance)
+    public GetBikeTheftsQuery(int distance, string? city = null, double? longitude = null, double? latitude = null)
     {
         City = city;
         Distance = distance;
+        Longitude = longitude;
+        Latitude = latitude;
     }
 }
-

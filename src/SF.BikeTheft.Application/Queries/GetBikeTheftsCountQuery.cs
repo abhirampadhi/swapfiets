@@ -1,6 +1,9 @@
-﻿namespace SF.BikeTheft.Application.Queries;
+﻿using MediatR;
+using SF.BikeTheft.Application.Models.DTOs;
 
-public sealed class GetBikeTheftsCountQuery
+namespace SF.BikeTheft.Application.Queries;
+
+public sealed class GetBikeTheftsCountQuery : IRequest<BikeCountDto>
 {
     public GetBikeTheftsCountQuery(string city, int distance)
     {
@@ -8,7 +11,7 @@ public sealed class GetBikeTheftsCountQuery
         Distance = distance;
     }
 
-    public string City { get; set; }
-    public int Distance { get; set; }
+    public string City { get; }
+    public int Distance { get;  }
 }
 

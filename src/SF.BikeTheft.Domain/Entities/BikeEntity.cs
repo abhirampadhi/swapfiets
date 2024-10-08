@@ -5,7 +5,7 @@ namespace SF.BikeTheft.Domain.Entities;
 public sealed class BikeEntity
 {
     [JsonProperty("date_stolen")]
-    public long DateStolen { get; set; } 
+    public long? DateStolen { get; set; } 
 
     [JsonProperty("description")]
     public string Description { get; set; }

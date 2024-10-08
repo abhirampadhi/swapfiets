@@ -9,5 +9,9 @@ public class MappingProfile : Profile
     {
         CreateMap<Models.BikeTheft, BikeDto>().ReverseMap();
         CreateMap<BikeDto, Domain.Entities.BikeEntity>().ReverseMap();
+
+        CreateMap<Models.BikeCount, BikeCountDto>().ReverseMap();
+        CreateMap<BikeCountDto, Domain.Entities.BikeCountEntity>().ReverseMap();
+
     }
 }

@@ -19,7 +19,22 @@ public class GetBikeTheftsHandler : IRequestHandler<GetBikeTheftsQuery, List<Bik
 
     public async Task<List<BikeDto>> Handle(GetBikeTheftsQuery request, CancellationToken cancellationToken)
     {
-        var thefts = await _bikeTheftService.GetBikeTheftsAsync(request.City, request.Distance);
+        if (request == null)
+            return new List<BikeDto>();
+
+        var location = string.Empty;
+        if (!string.IsNullOrEmpty(request.City))
+        {
+            location = request.City; 
+        }
+        else if (request.Latitude.HasValue && request.Longitude.HasValue)
+        {
+            location = $"{request.Latitude.Value},{request.Longitude.Value}"; 
+        }
+
+        var thefts = await _bikeTheftService.GetBikeTheftsAsync(location, request.Distance);
+
         return _mapper.Map<List<BikeDto>>(thefts);
     }
+
 }
