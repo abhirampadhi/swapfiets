@@ -15,11 +15,11 @@ jobs:
     steps:
       # Step to check out the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to v3
 
       # Step to set up the .NET SDK
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2  # Updated to v2
         with:
           dotnet-version: '8.x'  # Specify your desired .NET version
 
