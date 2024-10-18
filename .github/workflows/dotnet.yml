@@ -77,12 +77,19 @@ jobs:
 
       # Step to run the Docker container
       - name: Run Docker container
-        run: docker run -d -p 8080:80 --name bike-theft-api ghcr.io/${{ github.repository }}/bike-theft-api:latest
+        run: |
+           docker run -d -p 8080:80 --name bike-theft-api ghcr.io/${{ github.repository }}/bike-theft-api:latest
 
-      # Optionally, you can wait for a few seconds to ensure the container is up
       - name: Wait for the API to be ready
-        run: sleep 15
+        run: sleep 30
 
-      # Optional: Access the Swagger page
-      - name: Access Swagger page
-        run: curl -f http://localhost:8080/swagger || exit 1
+      - name: List running containers
+        run: docker ps
+
+      - name: Show logs
+        run: docker logs bike-theft-api
+
+      - name: Test the API
+        run: |
+         curl -f http://localhost:8080/swagger || exit 1
+
