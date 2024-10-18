@@ -19,7 +19,7 @@ jobs:
 
       # Step to set up the .NET SDK
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3  
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.x'  # Specify your desired .NET version
 
@@ -31,13 +31,35 @@ jobs:
       - name: Build the project
         run: dotnet build 'src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj' --configuration Release
 
+      # Step to run tests (optional)
+      - name: Run tests
+        run: dotnet test 'src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj' --no-build --verbosity normal
+
       # Step to publish the project
       - name: Publish the project
         run: dotnet publish 'src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj' --configuration Release --output ${{ github.workspace }}/drop
 
-      # Step to upload artifacts
+      # Step to upload build artifacts (optional, depends on your needs)
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: drop
           path: ${{ github.workspace }}/drop
+
+      # Step to set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step to log in to GitHub Container Registry (ghcr.io)
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      # Step to build the Docker image
+      - name: Build Docker image
+        run: docker build -t ghcr.io/${{ github.repository }}/bike-theft-api:latest .
+
+      # Step to push the Docker image to GitHub Container Registry
+      - name: Push Docker image to GitHub Container Registry
+        run: docker push ghcr.io/${{ github.repository }}/bike-theft-api:latest
+
+
