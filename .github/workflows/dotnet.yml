@@ -56,7 +56,7 @@ jobs:
 
       # Step to build the Docker image
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/bike-theft-api:latest -f src/SF.BikeTheft.WebApi/Dockerfile .
+        run: docker build -t ghcr.io/${{ github.repository }}/bike-theft-api:latest -f Dockerfile .
 
 
       # Step to push the Docker image to GitHub Container Registry
