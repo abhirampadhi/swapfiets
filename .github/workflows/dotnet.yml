@@ -29,11 +29,11 @@ jobs:
 
       # Step to build the project
       - name: Build the project
-        run: dotnet build 'src/WebAPI/SF.BikeTheft.WebApi.csproj' --configuration Release
+        run: dotnet build 'src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj' --configuration Release
 
       # Step to publish the project
       - name: Publish the project
-        run: dotnet publish 'src/WebAPI/SF.BikeTheft.WebApi.csproj' --configuration Release --output ${{ github.workspace }}/drop
+        run: dotnet publish 'src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj' --configuration Release --output ${{ github.workspace }}/drop
 
       # Step to upload artifacts
       - name: Upload artifacts
