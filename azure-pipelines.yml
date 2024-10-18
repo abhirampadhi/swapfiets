@@ -35,20 +35,4 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
 
-  - task: Docker@2
-    inputs:
-      containerRegistry: '<your-container-registry>'
-      repository: 'sf-biketheft-webapi'
-      command: 'buildAndPush'
-      Dockerfile: 'Dockerfile'
-      tags: |
-        $(Build.BuildId)
-
-  - task: Kubernetes@1
-    inputs:
-      connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: '<your-k8s-service-endpoint>'
-      namespace: 'default'
-      command: 'apply'
-      useConfigurationFile: true
-      configuration: 'deploy/helm/kubernetes-deploy.yaml'
+ 
