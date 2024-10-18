@@ -19,13 +19,13 @@ jobs:
 
       # Step to set up the .NET SDK
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3  # Updated to v3
+        uses: actions/setup-dotnet@v3  
         with:
           dotnet-version: '8.x'  # Specify your desired .NET version
 
       # Step to restore dependencies
       - name: Restore dependencies
-        run: dotnet restore '**/SF.BikeTheftWeb.*.csproj'
+        run: dotnet restore '**/SF.BikeTheft.WebApi.*.csproj'
 
       # Step to build the project
       - name: Build the project
