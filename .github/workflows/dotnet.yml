@@ -15,21 +15,21 @@ jobs:
     steps:
       # Step to check out the repository
       - name: Checkout code
-        uses: actions/checkout@v3  # Updated to v3
+        uses: actions/checkout@v4  # Updated to v4
 
       # Step to set up the .NET SDK
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v2  # Updated to v2
+        uses: actions/setup-dotnet@v3  # Updated to v3
         with:
           dotnet-version: '8.x'  # Specify your desired .NET version
 
       # Step to restore dependencies
       - name: Restore dependencies
-        run: dotnet restore '**/SF.BikeTheft.*.csproj'
+        run: dotnet restore '**/SF.BikeTheftWeb.*.csproj'
 
       # Step to build the project
       - name: Build the project
-        run: dotnet build '**/SF.BikeTheft.*.csproj' --configuration Release
+        run: dotnet build 'src/WebAPI/SF.BikeTheft.WebApi.csproj' --configuration Release
 
       # Step to publish the project
       - name: Publish the project
