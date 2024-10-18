@@ -25,7 +25,7 @@ jobs:
 
       # Step to restore dependencies
       - name: Restore dependencies
-        run: dotnet restore '**/SF.BikeTheft.WebApi.*.csproj'
+        run: dotnet restore 'src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj'
 
       # Step to build the project
       - name: Build the project
