@@ -1,24 +1,28 @@
 # Stage 1: Build the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
-WORKDIR /app
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
 
 # Copy the solution file and restore as distinct layers
 COPY SwapfietsBikeTheftTracker.sln ./
 COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj src/SF.BikeTheft.WebApi/
+COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.Application.csproj src/SF.BikeTheft.Application/
+COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.Common.csproj src/SF.BikeTheft.Common/
+COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.Domain.csproj src/SF.BikeTheft.Domain/
+COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.Infrastructure.csproj src/SF.BikeTheft.Infrastructure/
 
 RUN dotnet restore src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj
 
 # Copy everything else and build
-COPY . ./
-RUN dotnet publish src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj -c Release -o out
+COPY src/ .
+RUN dotnet publish ./SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj -c Release -o /app/build
+
+# Publish the app to a folder in the container
+RUN dotnet publish ./SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj -c Release -o /app/publish
 
 # Stage 2: Create the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build-env /app/out .
-
-# Expose port (if needed)
-EXPOSE 5000
+COPY --from=build /app/publish .
 
 # Set the entry point
 ENTRYPOINT ["dotnet", "SF.BikeTheft.WebApi.dll"]
