@@ -5,8 +5,8 @@ WORKDIR /src
 # Copy the solution file and restore as distinct layers
 COPY SwapfietsBikeTheftTracker.sln ./
 COPY src/SF.BikeTheft.WebApi/SF.BikeTheft.WebApi.csproj src/SF.BikeTheft.WebApi/
-COPY src/SF.BikeTheft.Domain/SF.BikeTheft.Application.csproj src/SF.BikeTheft.Domain/
-COPY src/SF.BikeTheft.Domain/SF.BikeTheft.Common.csproj src/SF.BikeTheft.Domain/
+COPY src/SF.BikeTheft.Application/SF.BikeTheft.Application.csproj src/SF.BikeTheft.Application/
+COPY src/SF.BikeTheft.Common/SF.BikeTheft.Common.csproj src/SF.BikeTheft.Common/
 COPY src/SF.BikeTheft.Domain/SF.BikeTheft.Domain.csproj src/SF.BikeTheft.Domain/
 COPY src/SF.BikeTheft.Infrastructure/SF.BikeTheft.Infrastructure.csproj src/SF.BikeTheft.Infrastructure/
 
